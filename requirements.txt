@@ -1,0 +1,2 @@
+git+git://github.com/broadinstitute/dig-bioindex.git@b6cf869d651bae171bd3254d2bcbc793300b24d9#egg=bioindex
+pymysql
