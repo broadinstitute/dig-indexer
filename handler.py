@@ -2,11 +2,9 @@ import json
 import os
 import pymysql
 
-from bioindex.lib.aws import connect_to_db, secret_lookup
 from bioindex.lib.config import Config
-from bioindex.lib.tables import lookup_index
-from bioindex.lib.index import _index_object, _bulk_insert
-from bioindex.lib.s3 import read_object
+from bioindex.lib.migrate import migrate
+from bioindex.lib.index import Index
 
 
 # This lambda uses the dig-bioindex repository code to index a single
@@ -24,38 +22,45 @@ from bioindex.lib.s3 import read_object
 
 
 def main(event, context):
+    pymysql.install_as_MySQLdb()
+
+    # extract environment settings
     index_name = event.get('index')
     rds_instance = event.get('rds_instance')
+    rds_schema = event.get('rds_schema')
     s3_bucket = event.get('s3_bucket')
     s3_obj = event.get('s3_obj')
 
-    # get _mysql
-    pymysql.install_as_MySQLdb()
-
-    # test secrets
-    print(f'Loading connection settings for {rds_instance}')
-    rds_connection_settings = secret_lookup(rds_instance)
+    # setup the configuration object
+    config = Config(
+        BIOINDEX_S3_BUCKET=s3_bucket,
+        BIOINDEX_RDS_INSTANCE=rds_instance,
+        BIOINDEX_BIO_SCHEMA=rds_schema,
+    )
 
     # connect to the BioIndex MySQL database
-    print(f'Connecting to {rds_instance}')
-    engine = connect_to_db(**rds_connection_settings)
+    print(f'Connecting to {rds_instance}/{rds_schema}...')
+    engine = migrate(config)
     assert engine, 'Failed to connect to RDS instance'
 
     # find the index by name
     print(f'Looking up index {index_name}')
-    index = lookup_index(engine, index_name)
+    index = Index.lookup(engine, index_name)
     assert index, 'Failed to find index'
 
     # get the list of records to insert
     print(f'Indexing s3://{s3_bucket}/{s3_obj["Key"]}')
-    s3_key, records = _index_object(engine, s3_bucket, s3_obj, index)
+    s3_key, records = index.index_object(engine, s3_bucket, s3_obj)
     records = list(records)
 
     # bulk insert them into the table
     print(f'Inserting {len(records):,} records')
-    _bulk_insert(engine, index.table, records)
+    index.insert_records_batched(engine, records)
 
+    # done
     print('Done!')
+
+    # return the key, record count, and total size
     return {
         'statusCode': 200,
         'body': {
@@ -64,14 +69,3 @@ def main(event, context):
             'size': s3_obj['Size'],
         },
     }
-
-
-if __name__ == '__main__':
-    main({
-        'index': 'genes',
-        'rds_instance': 'dig-bio-index',
-        's3_bucket': 'dig-bio-index',
-        's3_obj': {
-            'Key': 'genes/part-00000-7aba68ef-0133-4e4d-82ce-1fe9f9e5fb8b-c000.json',
-        },
-    })
