@@ -21,18 +21,20 @@ provider:
   versionFunctions: false
   timeout: 300  # 5 min; the maximum is 900s (15 min)
   region: us-east-1
-  provider.iam.role.statements:
-    - Effect: Allow
-      Action:
-        - "s3:*"
-      Resource:
-        - "arn:aws:s3:::dig-bio-index"
-        - "arn:aws:s3:::dig-bio-index/*"
-    - Effect: Allow
-      Action:
-        - "secretsmanager:*"
-      Resource:
-        - "arn:aws:secretsmanager:*:005901288866:secret:*"
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - "s3:*"
+          Resource:
+            - "arn:aws:s3:::dig-bio-index"
+            - "arn:aws:s3:::dig-bio-index/*"
+        - Effect: Allow
+          Action:
+            - "secretsmanager:*"
+          Resource:
+            - "arn:aws:secretsmanager:*:005901288866:secret:*"
   vpc:
     securityGroupIds:
       - "sg-00cc71c2befd8f4e9"

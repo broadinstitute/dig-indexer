@@ -32,9 +32,9 @@ def main(event, context):
     s3_obj = event.get('s3_obj')
 
     # set environment variables
-    os.putenv('BIOINDEX_S3_BUCKET', s3_bucket)
-    os.putenv('BIOINDEX_RDS_INSTANCE', rds_instance)
-    os.putenv('BIOINDEX_RDS_SCHEMA', rds_schema)
+    os.environ['BIOINDEX_S3_BUCKET'] = s3_bucket
+    os.environ['BIOINDEX_RDS_INSTANCE'] = rds_instance
+    os.environ['BIOINDEX_RDS_SCHEMA'] = rds_schema
 
     # setup the configuration object
     config = Config()
