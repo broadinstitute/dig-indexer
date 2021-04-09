@@ -21,7 +21,7 @@ provider:
   versionFunctions: false
   timeout: 300  # 5 min; the maximum is 900s (15 min)
   region: us-east-1
-  iamRoleStatements:
+  provider.iam.role.statements:
     - Effect: Allow
       Action:
         - "s3:*"
@@ -44,6 +44,11 @@ provider:
       - "subnet-ab89bbf3"
   environment:
     EXAMPLE: "foobar"
+
+custom:
+  pythonRequirements:
+    useDownloadCache: false
+    useStaticCache: false
 
 functions:
   main:
