@@ -19,7 +19,7 @@ provider:
   name: aws
   runtime: python3.8
   versionFunctions: false
-  timeout: 300  # 5 min; the maximum is 900s (15 min)
+  timeout: 600  # 10 min; the maximum is 900s (15 min)
   region: us-east-1
   iam:
     role:
