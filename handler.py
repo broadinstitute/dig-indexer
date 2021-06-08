@@ -31,12 +31,13 @@ def main(event, context):
     s3_bucket = event.get('s3_bucket')
     s3_obj = event.get('s3_obj')
 
+    # set environment variables
+    os.environ['BIOINDEX_S3_BUCKET'] = s3_bucket
+    os.environ['BIOINDEX_RDS_SECRET'] = rds_secret
+    os.environ['BIOINDEX_RDS_SCHEMA'] = rds_schema
+
     # setup the configuration object
-    config = Config(
-        BIOINDEX_S3_BUCKET=s3_bucket,
-        BIOINDEX_RDS_SECRET=rds_secret,
-        BIOINDEX_BIO_SCHEMA=rds_schema,
-    )
+    config = Config()
 
     # connect to the BioIndex MySQL database
     print(f'Connecting to {rds_secret}/{rds_schema}...')
