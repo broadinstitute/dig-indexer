@@ -26,7 +26,7 @@ def main(event, context):
 
     # extract environment settings
     index_name = event.get('index')
-    rds_instance = event.get('rds_instance')
+    rds_secret = event.get('rds_secret')
     rds_schema = event.get('rds_schema')
     s3_bucket = event.get('s3_bucket')
     s3_obj = event.get('s3_obj')
@@ -34,12 +34,12 @@ def main(event, context):
     # setup the configuration object
     config = Config(
         BIOINDEX_S3_BUCKET=s3_bucket,
-        BIOINDEX_RDS_INSTANCE=rds_instance,
+        BIOINDEX_RDS_SECRET=rds_secret,
         BIOINDEX_BIO_SCHEMA=rds_schema,
     )
 
     # connect to the BioIndex MySQL database
-    print(f'Connecting to {rds_instance}/{rds_schema}...')
+    print(f'Connecting to {rds_secret}/{rds_schema}...')
     engine = migrate(config)
     assert engine, 'Failed to connect to RDS instance'
 
