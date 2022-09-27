@@ -26,6 +26,7 @@ def main(event, context):
 
     # extract environment settings
     index_name = event.get('index')
+    index_arity = event.get('arity')
     rds_secret = event.get('rds_secret')
     rds_schema = event.get('rds_schema')
     s3_bucket = event.get('s3_bucket')
@@ -46,7 +47,7 @@ def main(event, context):
 
     # find the index by name
     print(f'Looking up index {index_name}')
-    index = Index.lookup(engine, index_name)
+    index = Index.lookup(engine, index_name, index_arity)
     assert index, 'Failed to find index'
 
     # get the list of records to insert
