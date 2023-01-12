@@ -32,6 +32,8 @@ provider:
             - "arn:aws:s3:::dig-bio-index/*"
             - "arn:aws:s3:::dig-giant-sandbox"
             - "arn:aws:s3:::dig-giant-sandbox/*"
+            - "arn:aws:s3:::dig-nephkp"
+            - "arn:aws:s3:::dig-nephkp/*"
         - Effect: Allow
           Action:
             - "secretsmanager:*"
