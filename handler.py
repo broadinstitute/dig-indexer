@@ -35,7 +35,7 @@ def main(event, context):
     # set environment variables
     os.environ['BIOINDEX_S3_BUCKET'] = s3_bucket
     os.environ['BIOINDEX_RDS_SECRET'] = rds_secret
-    os.environ['BIOINDEX_RDS_SCHEMA'] = rds_schema
+    os.environ['BIOINDEX_BIO_SCHEMA'] = rds_schema
 
     # setup the configuration object
     config = Config()

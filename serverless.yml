@@ -34,6 +34,8 @@ provider:
             - "arn:aws:s3:::dig-giant-sandbox/*"
             - "arn:aws:s3:::dig-nephkp"
             - "arn:aws:s3:::dig-nephkp/*"
+            - "arn:aws:s3:::dig-data-registry-qa"
+            - "arn:aws:s3:::dig-data-registry-qa/*"
         - Effect: Allow
           Action:
             - "secretsmanager:*"
