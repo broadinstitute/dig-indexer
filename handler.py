@@ -62,6 +62,8 @@ def main(event, context):
     # done
     print('Done!')
 
+    engine.dispose()
+
     # return the key, record count, and total size
     return {
         'statusCode': 200,
