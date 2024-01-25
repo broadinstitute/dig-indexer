@@ -36,6 +36,10 @@ provider:
             - "arn:aws:s3:::dig-nephkp/*"
             - "arn:aws:s3:::dig-data-registry-qa"
             - "arn:aws:s3:::dig-data-registry-qa/*"
+            - "arn:aws:s3:::dig-sleep-private"
+            - "arn:aws:s3:::dig-sleep-private/*"
+            - "arn:aws:s3:::dig-analysis-igvf"
+            - "arn:aws:s3:::dig-analysis-igvf/*"
         - Effect: Allow
           Action:
             - "secretsmanager:*"
