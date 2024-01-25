@@ -1,3 +1,4 @@
 git+https://github.com/broadinstitute/dig-bioindex.git@master#egg=bioindex
 PyMySQL==1.0.2
 SQLAlchemy==2.0.3
+orjson==3.6.0
