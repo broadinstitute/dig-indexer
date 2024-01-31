@@ -40,6 +40,8 @@ provider:
             - "arn:aws:s3:::dig-sleep-private/*"
             - "arn:aws:s3:::dig-analysis-igvf"
             - "arn:aws:s3:::dig-analysis-igvf/*"
+            - "arn:aws:s3:::dig-vision-genomics"
+            - "arn:aws:s3:::dig-vision-genomics/*"
         - Effect: Allow
           Action:
             - "secretsmanager:*"
