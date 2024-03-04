@@ -42,6 +42,8 @@ provider:
             - "arn:aws:s3:::dig-analysis-igvf/*"
             - "arn:aws:s3:::dig-vision-genomics"
             - "arn:aws:s3:::dig-vision-genomics/*"
+            - "arn:aws:s3:::dig-analysis-cfde"
+            - "arn:aws:s3:::dig-analysis-cfde/*"
         - Effect: Allow
           Action:
             - "secretsmanager:*"
