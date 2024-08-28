@@ -46,8 +46,8 @@ provider:
             - "arn:aws:s3:::dig-vision-genomics/*"
             - "arn:aws:s3:::dig-analysis-cfde"
             - "arn:aws:s3:::dig-analysis-cfde/*"
-            - "arn:aws:s3:::dig-skip-kp"
-            - "arn:aws:s3:::dig-skip-kp/*"
+            - "arn:aws:s3:::dig-skin-kp"
+            - "arn:aws:s3:::dig-skin-kp/*"
         - Effect: Allow
           Action:
             - "secretsmanager:*"
