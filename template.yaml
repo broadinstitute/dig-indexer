@@ -1,0 +1,60 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Lambda function to index data in s3 to rds database
+
+Resources:
+  IndexerLambdaFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: dig-indexer-dev-main
+      VpcConfig:
+        SecurityGroupIds:
+          - sg-00cc71c2befd8f4e9
+          - sg-28485f53
+        SubnetIds:
+          - subnet-dc89bb84
+          - subnet-798ebc21
+          - subnet-4fe9e572
+          - subnet-ab89bbf3
+      CodeUri: .
+      Handler: handler.main
+      Runtime: python3.9
+      Timeout: 600
+      MemorySize: 1024
+      Policies:
+        - AWSLambdaVPCAccessExecutionRole
+        - Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - secretsmanager:GetSecretValue
+              Resource: 'arn:aws:secretsmanager:us-east-1:005901288866:secret:*'
+            - Effect: Allow
+              Action:
+                - s3:GetObject
+                - s3:ListBucket
+              Resource:
+                - "arn:aws:s3:::dig-bio-index"
+                - "arn:aws:s3:::dig-bio-index/*"
+                - "arn:aws:s3:::dig-giant-sandbox"
+                - "arn:aws:s3:::dig-giant-sandbox/*"
+                - "arn:aws:s3:::dig-nephkp"
+                - "arn:aws:s3:::dig-nephkp/*"
+                - "arn:aws:s3:::dig-data-registry-qa"
+                - "arn:aws:s3:::dig-data-registry-qa/*"
+                - "arn:aws:s3:::dig-sleep-private"
+                - "arn:aws:s3:::dig-sleep-private/*"
+                - "arn:aws:s3:::dig-analysis-igvf"
+                - "arn:aws:s3:::dig-analysis-igvf/*"
+                - "arn:aws:s3:::dig-igvf-lipids"
+                - "arn:aws:s3:::dig-igvf-lipids/*"
+                - "arn:aws:s3:::dig-vision-genomics"
+                - "arn:aws:s3:::dig-vision-genomics/*"
+                - "arn:aws:s3:::dig-analysis-cfde"
+                - "arn:aws:s3:::dig-analysis-cfde/*"
+                - "arn:aws:s3:::dig-skin-kp"
+                - "arn:aws:s3:::dig-skin-kp/*"
+
+
+      Tags:
+        Project: "dig-indexer"

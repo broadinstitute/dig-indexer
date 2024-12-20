@@ -4,19 +4,18 @@ This lambda function makes use of the code in the [BioIndex][bioindex] project t
 
 ## Quickstart
 
-From an EC2 instance with this repository cloned, make sure you have [NodeJS][node] installed and then first install [Serverless][serverless]:
-
+Install [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html) if not already installed.  Then you package the lambda with: 
 ```bash
-$ npm install -g serverless
+sam build
 ```
 
 Then, you should be able to build and deploy the lambda function with:
 
 ```bash
-$ serverless deploy -v
+sam deploy
 ```
 
-If you make any changes and need to update the existing lambda function, simply deploy again and it will be updated.
+If you make any changes and need to update the existing lambda function, simply follow the above steps again.
 
 ## Invoking
 
