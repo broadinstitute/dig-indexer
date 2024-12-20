@@ -1,0 +1,76 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: dig-indexer
+
+plugins:
+  - serverless-python-requirements
+provider:
+  name: aws
+  runtime: python3.8
+  versionFunctions: false
+  timeout: 600  # 10 min; the maximum is 900s (15 min)
+  region: us-east-1
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - "s3:*"
+          Resource:
+            - "arn:aws:s3:::dig-bio-index"
+            - "arn:aws:s3:::dig-bio-index/*"
+            - "arn:aws:s3:::dig-giant-sandbox"
+            - "arn:aws:s3:::dig-giant-sandbox/*"
+            - "arn:aws:s3:::dig-nephkp"
+            - "arn:aws:s3:::dig-nephkp/*"
+            - "arn:aws:s3:::dig-data-registry-qa"
+            - "arn:aws:s3:::dig-data-registry-qa/*"
+            - "arn:aws:s3:::dig-sleep-private"
+            - "arn:aws:s3:::dig-sleep-private/*"
+            - "arn:aws:s3:::dig-analysis-igvf"
+            - "arn:aws:s3:::dig-analysis-igvf/*"
+            - "arn:aws:s3:::dig-igvf-lipids"
+            - "arn:aws:s3:::dig-igvf-lipids/*"
+            - "arn:aws:s3:::dig-vision-genomics"
+            - "arn:aws:s3:::dig-vision-genomics/*"
+            - "arn:aws:s3:::dig-analysis-cfde"
+            - "arn:aws:s3:::dig-analysis-cfde/*"
+            - "arn:aws:s3:::dig-skin-kp"
+            - "arn:aws:s3:::dig-skin-kp/*"
+        - Effect: Allow
+          Action:
+            - "secretsmanager:*"
+          Resource:
+            - "arn:aws:secretsmanager:*:005901288866:secret:*"
+  vpc:
+    securityGroupIds:
+      - "sg-00cc71c2befd8f4e9"
+      - "sg-28485f53"
+    subnetIds:
+      - "subnet-dc89bb84"
+      - "subnet-798ebc21"
+      - "subnet-4fe9e572"
+      - "subnet-ab89bbf3"
+  environment:
+    EXAMPLE: "foobar"
+
+custom:
+  pythonRequirements:
+    useDownloadCache: false
+    useStaticCache: false
+
+functions:
+  main:
+    handler: handler.main
+
