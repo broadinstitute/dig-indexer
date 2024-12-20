@@ -46,10 +46,14 @@ Resources:
                 - "arn:aws:s3:::dig-sleep-private/*"
                 - "arn:aws:s3:::dig-analysis-igvf"
                 - "arn:aws:s3:::dig-analysis-igvf/*"
+                - "arn:aws:s3:::dig-igvf-lipids"
+                - "arn:aws:s3:::dig-igvf-lipids/*"
                 - "arn:aws:s3:::dig-vision-genomics"
                 - "arn:aws:s3:::dig-vision-genomics/*"
                 - "arn:aws:s3:::dig-analysis-cfde"
                 - "arn:aws:s3:::dig-analysis-cfde/*"
+                - "arn:aws:s3:::dig-skin-kp"
+                - "arn:aws:s3:::dig-skin-kp/*"
 
 
       Tags:
