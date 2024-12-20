@@ -1,3 +1,6 @@
 .serverless/
 node_modules/
 .idea/
+*.pyc
+.aws-sam/
+__pycache__/
