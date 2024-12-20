@@ -9,7 +9,7 @@ Install [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/l
 sam build
 ```
 
-Then, you should be able to build and deploy the lambda function with:
+Then, you should be able to build and deploy the lambda function with (with project root as your workind directory):
 
 ```bash
 sam deploy
@@ -46,12 +46,10 @@ The actual lambda function code is in `handler.py` and is fairly straight-forwar
 5. Write the index records to the database.
 6. Return success, the key, and # of records written.
 
-## Serverless Configuration
+## Lambda Configuration
 
-While the serverless configuration (`serverless.yml`) is fairly simple, there are a few points of interest that should be noted:
-
-1. The `vpc` section is necessary to allow the lambda to connect to the RDS database instance. You cannot supply a VPC directly, however. Instead, you need to specify all the subnets and security groups of the RDS instance you intend to access, and AWS will give you access to the VPC(s) that use them.
-2. The `iamRoleStatements` provide the lambda with access to the Secrets Manager and S3. However, because there is a VPC specified, the lambda will not be able to access them unless end points are created for the VPC. See (from [https://www.serverless.com/framework/docs/providers/aws/guide/functions/](https://www.serverless.com/framework/docs/providers/aws/guide/functions/)):
+[template.yaml](template.yaml) is a cloud formation template that SAM uses to define the lambda and its dependencies.
+The lambda needs to read files from s3, get secrets from the secrets manager, and write to an RDS instance. The first two requirements are handled via the Policies section.  The RDS connectivity is managed thanks to the VPC Config + AWSLambdaVPCAccessExecutionRole under policies. 
 
 > VPC Lambda Internet Access
 >
@@ -60,7 +58,4 @@ While the serverless configuration (`serverless.yml`) is fairly simple, there ar
 Two end-points for the correct AWS VPC have already been created (for S3 and the Secrets Manager). But, if something starts not working (timeouts), this is likely the culprit!!
 
 
-[bioindex]: https://github.com/broadinstitute/dig-bioindex
-[serverless]: https://www.serverless.com/
-[node]: https://nodejs.org/
 
