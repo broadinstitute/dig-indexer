@@ -54,6 +54,8 @@ Resources:
                 - "arn:aws:s3:::dig-analysis-cfde/*"
                 - "arn:aws:s3:::dig-skin-kp"
                 - "arn:aws:s3:::dig-skin-kp/*"
+                - "arn:aws:s3:::dig-pankbase-bio-index"
+                - "arn:aws:s3:::dig-pankbase-bio-index/*"
 
 
       Tags:
