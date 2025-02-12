@@ -52,10 +52,14 @@ Resources:
                 - "arn:aws:s3:::dig-vision-genomics/*"
                 - "arn:aws:s3:::dig-analysis-cfde"
                 - "arn:aws:s3:::dig-analysis-cfde/*"
-                - "arn:aws:s3:::dig-skin-kp"
-                - "arn:aws:s3:::dig-skin-kp/*"
                 - "arn:aws:s3:::dig-pankbase-bio-index"
                 - "arn:aws:s3:::dig-pankbase-bio-index/*"
+                - "arn:aws:s3:::dig-analysis-radiant"
+                - "arn:aws:s3:::dig-analysis-radiant/*"
+                - "arn:aws:s3:::dig-analysis-private"
+                - "arn:aws:s3:::dig-analysis-private/*"
+                - "arn:aws:s3:::dig-cancer-kp"
+                - "arn:aws:s3:::dig-cancer-kp/*"
 
 
       Tags:
