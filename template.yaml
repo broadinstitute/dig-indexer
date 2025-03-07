@@ -60,6 +60,8 @@ Resources:
                 - "arn:aws:s3:::dig-analysis-private/*"
                 - "arn:aws:s3:::dig-cancer-kp"
                 - "arn:aws:s3:::dig-cancer-kp/*"
+                - "arn:aws:s3:::dig-analysis-matkp"
+                - "arn:aws:s3:::dig-analysis-matkp/*"
 
 
       Tags:
